@@ -1,5 +1,6 @@
 class Player
   def initialize(dealer)
+    @dealer = dealer
     @hands = dealer.deal(5)
   end
 
@@ -25,7 +26,8 @@ class Player
       discard_cards.each do |num|
         @hands[num] = nil
       end
-      return
     end
+
+    @hands = @dealer.change(@hands)
   end
 end

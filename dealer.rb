@@ -18,4 +18,13 @@ class Dealer
   def show(num)
     puts @deck.decks.first(num)
   end
+
+  def change(hands)
+    hands.length.times do |num|
+      if hands[num].nil?
+        hands[num] = @deck.decks.shift
+      end
+    end
+    hands
+  end
 end
