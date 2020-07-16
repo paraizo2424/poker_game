@@ -41,9 +41,9 @@ class Player
     #   return "ロイヤルストレートフラッシュ"
     # end
 
-    # if same_suit_flug && count_up_flug
-    #   return "ストレートフラッシュ"
-    # end
+    if same_suit_flug && count_up_flug
+      return "ストレートフラッシュ"
+    end
 
     # if 
     #   return "フォーカード"
@@ -57,9 +57,9 @@ class Player
       return "フラッシュ"
     end
 
-    # if count_up_flug
-    #   return "ストレート"
-    # end
+    if count_up_flug
+      return "ストレート"
+    end
 
     # if same_suit_flug
     #   return "スリーカード"
@@ -88,5 +88,22 @@ class Player
   end
 
   def count_up?
+    arr = []
+    @hands.each do |card|
+      arr << card[:num]
+    end
+
+    arr.sort!
+
+    num = arr.first
+    (1..4).each do |i|
+      if (num + 1) != arr[i]
+        return false
+      end
+
+      num += 1
+    end
+
+    return true
   end
 end
