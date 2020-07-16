@@ -14,6 +14,8 @@ class Player
         pp hand
       end
     end
+
+    puts "現在の役は#{self.judge}です。"
     puts "--------"
   end
 
@@ -29,5 +31,62 @@ class Player
     end
 
     @hands = @dealer.change(@hands)
+  end
+
+  def judge
+    same_suit_flug = all_same_suit?
+    count_up_flug = count_up?
+
+    # if same_suit_flug
+    #   return "ロイヤルストレートフラッシュ"
+    # end
+
+    # if same_suit_flug && count_up_flug
+    #   return "ストレートフラッシュ"
+    # end
+
+    # if 
+    #   return "フォーカード"
+    # end
+
+    # if same_suit_flug
+    #   return "フルハウス"
+    # end
+
+    if same_suit_flug
+      return "フラッシュ"
+    end
+
+    # if count_up_flug
+    #   return "ストレート"
+    # end
+
+    # if same_suit_flug
+    #   return "スリーカード"
+    # end
+
+    # if same_suit_flug
+    #   return "ツーペア"
+    # end
+
+    # if same_suit_flug
+    #   return "ワンペア"
+    # end
+
+    "豚"
+  end
+
+  def all_same_suit?
+    suit = @hands.first[:suit]
+    (1..4).each do |i|
+      if suit != @hands[i][:suit]
+        return false
+      end
+    end
+
+    return true
+  end
+
+  def count_up?
   end
 end
