@@ -37,9 +37,11 @@ class Player
     same_suit_flug = all_same_suit?
     count_up_flug = count_up?
 
-    # if same_suit_flug
-    #   return "ロイヤルストレートフラッシュ"
-    # end
+    if same_suit_flug
+      if royal_straight?
+        return "ロイヤルストレートフラッシュ"
+      end
+    end
 
     if same_suit_flug && count_up_flug
       return "ストレートフラッシュ"
@@ -105,5 +107,14 @@ class Player
     end
 
     return true
+  end
+
+  def royal_straight?
+    arr = []
+    @hands.each do |card|
+      arr << card[:num]
+    end
+
+    return arr.sort == [1, 10, 11, 12, 13]
   end
 end
