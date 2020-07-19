@@ -36,6 +36,7 @@ class Player
   def judge
     same_suit_flug = all_same_suit?
     count_up_flug = count_up?
+    pair_counts = count_pair
 
     if same_suit_flug
       if royal_straight?
@@ -47,13 +48,13 @@ class Player
       return "ストレートフラッシュ"
     end
 
-    # if 
-    #   return "フォーカード"
-    # end
+    if pair_counts[:four_card?]
+      return "フォーカード"
+    end
 
-    # if same_suit_flug
-    #   return "フルハウス"
-    # end
+    if pair_counts[:three_card?] && (pair_counts[:pair_count] > 0)
+      return "フルハウス"
+    end
 
     if same_suit_flug
       return "フラッシュ"
@@ -63,17 +64,17 @@ class Player
       return "ストレート"
     end
 
-    # if same_suit_flug
-    #   return "スリーカード"
-    # end
+    if pair_counts[:three_card?]
+      return "スリーカード"
+    end
 
-    # if same_suit_flug
-    #   return "ツーペア"
-    # end
+    if pair_counts[:pair_count] == 2
+      return "ツーペア"
+    end
 
-    # if same_suit_flug
-    #   return "ワンペア"
-    # end
+    if pair_counts[:pair_count] == 1
+      return "ワンペア"
+    end
 
     "豚"
   end
@@ -116,5 +117,32 @@ class Player
     end
 
     return arr.sort == [1, 10, 11, 12, 13]
+  end
+
+  def count_pair
+    arr = []
+    @hands.each do |card|
+      arr << card[:num]
+    end
+    
+    pair_counts = {pair_count: 0, three_card: false, four_card?: false}
+    i = 1
+    arr_length = arr.length
+    while !arr.empty?
+      arr.delete(i)
+      
+      if (arr_length - 2) == arr.length
+        pair_counts[:pair_count] += 1
+      elsif (arr_length - 3) == arr.length
+        pair_counts[:three_card?] = true
+      elsif (arr_length - 4) == arr.length
+        pair_counts[:four_card?] = true
+      end
+
+      arr_length = arr.length
+      i += 1
+    end
+
+    pair_counts
   end
 end
