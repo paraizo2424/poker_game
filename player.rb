@@ -1,11 +1,13 @@
 class Player
-  def initialize(dealer)
+  def initialize(dealer, i)
     @dealer = dealer
     @hands = dealer.deal(5)
+    @Player_id = i
   end
 
   def show
     puts "--------"
+    puts "#{@Player_id} さんのターンです。"
     @hands.each_with_index do |hand, i|
       print "#{i} => "
       if hand
