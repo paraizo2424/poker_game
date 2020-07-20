@@ -1,6 +1,20 @@
 require "./dealer"
 require "./player"
 
+# 役の強さの順番
+HAND_STRENGTH = [
+  "ロイヤルストレートフラッシュ",
+  "ストレートフラッシュ",
+  "フォーカード",
+  "フルハウス",
+  "フラッシュ",
+  "ストレート",
+  "スリーカード",
+  "ツーペア",
+  "ワンペア",
+  "豚"
+]
+
 class GameMaster
   def initialize
     # ディーラーがトランプ一組を持って現れる
@@ -32,6 +46,23 @@ class GameMaster
       player.show
     end
 
+    # 勝敗の判定
+    self.judge
+
     puts "＜ゲーム終了＞"
+  end
+
+  def judge
+    player_hands = []
+
+    @players.each do |player|
+      player_hands << HAND_STRENGTH.find_index(player.judge)
+    end
+
+    if player_hands.count(player_hands.min) == 1
+      puts "#{player_hands.find_index(player_hands.min)}さんの勝利です。"
+    else
+      puts "引き分けです。"
+    end
   end
 end
