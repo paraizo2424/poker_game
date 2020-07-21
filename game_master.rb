@@ -56,7 +56,7 @@ class GameMaster
     player_hands = []
 
     @players.each do |player|
-      player_hands << HAND_STRENGTH.find_index(player.judge)
+      player_hands << HAND_STRENGTH.find_index(player.poker_hand)
     end
 
     if player_hands.count(player_hands.min) == 1

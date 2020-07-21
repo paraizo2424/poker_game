@@ -3,9 +3,12 @@ require_relative 'judge_hand'
 class Player
   include JudgeHand
 
+  attr_accessor :poker_hand
+
   def initialize(dealer, i)
     @dealer = dealer
     @hands = dealer.deal(5)
+    @poker_hand = self.judge(@hands)
     @Player_id = i
   end
 
@@ -21,7 +24,7 @@ class Player
       end
     end
 
-    puts "現在の役は#{self.judge(@hands)}です。"
+    puts "現在の役は#{@poker_hand}です。"
     puts "--------"
   end
 
@@ -37,5 +40,6 @@ class Player
     end
 
     @hands = @dealer.change(@hands)
+    @poker_hand = self.judge(@hands)
   end
 end
