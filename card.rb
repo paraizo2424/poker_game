@@ -12,6 +12,9 @@ class Card
     13 => "K"
   }
 
+  attr_accessor :suit
+  attr_accessor :num
+
   def initialize(suit, num)
     @num = num
     @suit = suit
