@@ -8,12 +8,12 @@ class Player
   def show
     puts "--------"
     puts "#{@Player_id} さんのターンです。"
-    @hands.each_with_index do |hand, i|
+    @hands.each_with_index do |card, i|
       print "#{i} => "
-      if hand
-        puts "#{hand[:suit]}#{hand[:num]}"
+      if card
+        puts "#{card.show}"
       else
-        pp hand
+        pp card
       end
     end
 
