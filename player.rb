@@ -3,18 +3,18 @@ require_relative 'judge_hand'
 class Player
   include JudgeHand
 
+  attr_accessor :id
   attr_accessor :poker_hand
 
   def initialize(dealer, i)
     @dealer = dealer
     @hands = dealer.deal(5)
     @poker_hand = self.judge(@hands)
-    @Player_id = i
+    @id = i
   end
 
   def show
     puts "--------"
-    puts "#{@Player_id} さんのターンです。"
     @hands.each_with_index do |card, i|
       print "#{i} => "
       if card

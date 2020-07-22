@@ -1,5 +1,5 @@
-require "./dealer"
-require "./player"
+require_relative "dealer"
+require_relative "player"
 
 # 役の強さの順番
 HAND_STRENGTH = [
@@ -32,9 +32,10 @@ class GameMaster
 
   def start
     puts "＜ゲーム開始＞"
-    
+
     @players.each do |player|
       # プレイヤーの手札を表示する
+      puts "#{player.id} さんのターンです。"
       player.show
 
       puts "捨てるカードの番号を半角スペース区切りで入力してください。"
@@ -52,6 +53,7 @@ class GameMaster
     puts "＜ゲーム終了＞"
   end
 
+  # 勝敗を判定する
   def judge
     player_hands = []
 
