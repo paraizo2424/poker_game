@@ -1,8 +1,12 @@
 module JudgeHand
   def judge(hands)
     @hands = hands
+
+    # 手札の5枚のすべてが同じスートか
     same_suit_flug = all_same_suit?
+    # 手札の数字が並びになっているか
     count_up_flug = count_up?
+    # 4カード、3カード、ペアが何組ずつあるか
     pair_counts = count_pair
 
     if same_suit_flug
@@ -91,13 +95,13 @@ module JudgeHand
     @hands.each do |card|
       arr << card.num
     end
-    
+
     pair_counts = {pair_count: 0, three_card: false, four_card?: false}
     i = 1
     arr_length = arr.length
     while !arr.empty?
       arr.delete(i)
-      
+
       if (arr_length - 2) == arr.length
         pair_counts[:pair_count] += 1
       elsif (arr_length - 3) == arr.length
